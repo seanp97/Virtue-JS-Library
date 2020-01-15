@@ -21,7 +21,9 @@ var inc = 0;
 var newInc = 0;
 var isUpper = "";
 var isLower = "";
-newElemClass = "";
+var newElemClass = "";
+var inpVal = "";
+var newInpVal = "";
 
 function sliderChild(element, findChild, slideSpeed, activeClass) {
     $(element).each(function () {
