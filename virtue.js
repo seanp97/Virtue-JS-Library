@@ -25,6 +25,7 @@ var newElemClass = "";
 var inpVal = "";
 var newInpVal = "";
 var thisClick = "";
+var isElemCapsFullWord = "";
 
 function sliderChild(element, findChild, slideSpeed, activeClass) {
     $(element).each(function () {
@@ -455,6 +456,17 @@ function isElemUpper(element, userFunc, elseFunc) {
 }
 
 //Only works with one worded sentences
+/*
+    $(document).click(function () { 
+        if(isElemCapsFullWord) {
+            thisClick.css("color", "blue");
+        }
+        else if (isElemCapsFullWord == false) {
+            thisClick.css("color", "red");
+        }
+    }); 
+
+*/
 function isElemCaps(element, userFunc, elseFunc) {
     $(element).each(function (){
         $(this).click(function () {
@@ -462,6 +474,10 @@ function isElemCaps(element, userFunc, elseFunc) {
             firstLetter = $(this).text().substring(0, 1);
             textLen = $(this).text().length;
             restOfString = $(this).text().substring(1, textLen);
+            isElemCapsFullWord = firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase();
+            
+            //↑↑↑↑ Returns True if Capitalized and False if not Capitalized
+
             if(firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase()) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Capitalized");
