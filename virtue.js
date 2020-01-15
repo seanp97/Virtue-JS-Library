@@ -20,6 +20,7 @@ var newText = "";
 var inc = 0;
 var newInc = 0;
 var isUpper = "";
+var isLower = "";
 newElemClass = "";
 
 function sliderChild(element, findChild, slideSpeed, activeClass) {
@@ -35,7 +36,7 @@ function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
             if ($(element).is(":hidden")) {
-                if (typeof userFunc != 'function'){ 
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("No function found");
                }
                else {
@@ -43,7 +44,7 @@ function isElemHidden(element, userFunc, elseFunc) {
                }
             }
             else {
-                if (typeof userFunc != 'function'){ 
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("No function found");
                }
                else {
@@ -56,7 +57,7 @@ function isElemHidden(element, userFunc, elseFunc) {
 
 function ifElemExists(element, userFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function'){ 
+        if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
             alert("No function found");
        }
        else {
@@ -172,7 +173,7 @@ function isDragging(element, userFunc) {
 
     $(document).mousemove(function (event) {
         if (isPressed) {
-            if (typeof userFunc != 'function'){ 
+            if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                 alert("No function found");
            }
            else {
@@ -256,7 +257,7 @@ function hrefMatchURL(element, userFunc, elseFunc) {
     $(element).each(function () {
         var hrefURL = window.location.href;
         if ($(this).attr("href") == hrefURL) {
-            if (typeof userFunc != 'function'){ 
+            if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                 alert("Matching Href");
            }
            else {
@@ -264,7 +265,7 @@ function hrefMatchURL(element, userFunc, elseFunc) {
            }
         }
         else {
-            if (typeof userFunc != 'function'){ 
+            if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                 alert("Doesn't match Href");
            }
            else {
@@ -278,7 +279,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
     $(window).bind('mousewheel', function(event) {
         if (event.originalEvent.wheelDelta >= 0) {
             $(element).removeClass(scrollClass);
-            if (typeof userFunc != 'function'){ 
+            if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                 alert("No function found");
            }
            else {
@@ -287,7 +288,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
         }
         else {
             $(element).addClass(scrollClass);
-            if (typeof userFunc != 'function'){ 
+            if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                 alert("No function found");
            }
            else {
@@ -354,7 +355,7 @@ function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
             matchElemClass = $(this).attr(attrType).split(/\s+/);
             if (matchElemClass != "" || matchElemClass != null || matchElemClass != undefined) {
                 if ($(this).hasClass(matchingAttr)) {
-                    if (typeof userFunc != 'function'){ 
+                    if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                         alert("Contains");
                    }
                    else {
@@ -375,7 +376,7 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
             matchElemClassExact = $(this).attr(attrType).split(/\s+/);
             if (matchElemClassExact != "" || matchElemClassExact != null || matchElemClassExact != undefined) {
                 if (matchElemClassExact == matchingAttr) {
-                    if (typeof userFunc != 'function'){ 
+                    if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                         alert("Matching attribute");
                    }
                    else {
@@ -384,7 +385,7 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
                 }
             }
             else {
-                if (typeof elseFunc != 'function'){ 
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("No match");
                }
                else {
@@ -414,7 +415,7 @@ function isElemUpper(element, userFunc, elseFunc) {
         $(this).click(function () {
             isUpper = $(this).text();
             if(isUpper == isUpper.toUpperCase()) {             
-               if (typeof userFunc != 'function'){ 
+               if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("Upper");
                }
                else {
@@ -422,7 +423,12 @@ function isElemUpper(element, userFunc, elseFunc) {
                }
             }
             else {
-                elseFunc() || alert("Lower");
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
+                    alert("Not upper");
+               }
+               else {
+                    elseFunc();
+               }
             }
         });
     });
@@ -435,7 +441,7 @@ function isElemCaps(element, userFunc, elseFunc) {
             textLen = $(this).text().length;
             restOfString = $(this).text().substring(1, textLen);
             if(firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase()) {
-                if (typeof userFunc != 'function'){ 
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("Capitalized");
                }
                else {
@@ -443,7 +449,7 @@ function isElemCaps(element, userFunc, elseFunc) {
                }
             }
             else {
-                if (typeof elseFunc != 'function'){ 
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
                     alert("Not capitalized");
                }
                else {
@@ -451,6 +457,30 @@ function isElemCaps(element, userFunc, elseFunc) {
                }
             }
             
+        });
+    });
+}
+
+function isElemLower(element, userFunc, elseFunc) {
+    $(element).each(function () {
+        $(this).click(function () {
+            isLower = $(this).text();
+            if(isLower == isLower.toLowerCase()) {             
+               if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
+                    alert("Lower");
+               }
+               else {
+                    userFunc();
+               }
+            }
+            else {
+                if (typeof userFunc != 'function' || typeof elseFunc != 'function'){ 
+                    alert("Not lower");
+               }
+               else {
+                    elseFunc();
+               }
+            }
         });
     });
 }
