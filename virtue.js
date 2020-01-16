@@ -265,8 +265,8 @@ function scrollToElem(element, attrType, tag, dataAttr) {
         $(this).click(function () {
             virtThisElem = $(this);
             var thisID = $(this).attr(attrType);          
-            var x =  $(`body ${tag}[${dataAttr}="${thisID}"]`).position().top;
-            $("html, body").animate({ scrollTop: x }, 1000);
+            var virtPosTop =  $(`body ${tag}[${dataAttr}="${thisID}"]`).position().top;
+            $("html, body").animate({ scrollTop: virtPosTop }, 1000);
         });
     });
 }
