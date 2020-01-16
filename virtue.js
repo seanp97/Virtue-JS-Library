@@ -26,6 +26,8 @@ var virtThisElem = "";
 var virtIsElemCapsFullWord = "";
 var virtElemHiddenBool = false;
 var newVirtElemHiddenBool = undefined;
+var virtElemLen = 0;
+var newVirtElemLen = 0;
 
 
 // Will only work if tag/class is nested inside. Will not work if a sibling
@@ -74,12 +76,22 @@ function elementIsHidden() {
     return newVirtElemHiddenBool;
 }
 
+function getElemLength(element) {
+    virtElemLen = $(element).length;
+    return virtElemLen;
+}
+
+function elementLength() {
+    newVirtElemLen = virtElemLen;
+    return newVirtElemLen;
+}
+
 function ifElemExists(element, userFunc) {
     if ($(element).length > 0) {
         if (typeof userFunc != 'function') { 
             alert("Element exists");
         }
-        else {
+        else if (typeof userFunc == 'function') {
             userFunc();
         }
     }
@@ -199,16 +211,14 @@ function isDragging(element, userFunc) {
 
     $(document).mousemove(function () {
         if (virtIsPressed) {
-            if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+            if (typeof userFunc != 'function') { 
                 alert("Dragging");
                 virtIsPressed = false;
            }
-           else {
+           else if (typeof userFunc == 'function') {
                 userFunc();
                 virtIsPressed = false;
            }
-        }
-        else {
         }
     });
 }
@@ -273,33 +283,34 @@ function navHighlight(element, navLink, sectionClass, navActiveClass, scrollInPo
     });
 }
 
-function scrollToElem(element, attrType, tag, dataAttr) {
+function scrollToElem(element, attrType, tag, dataAttr, scrollSpeed) {
     $(element).each(function () {
         $(this).click(function () {
             virtThisElem = $(this);
             var virtThisID = $(this).attr(attrType);          
             var virtPosTop =  $(`body ${tag}[${dataAttr}="${virtThisID}"]`).position().top;
-            $("html, body").animate({ scrollTop: virtPosTop }, 1000);
+            $("html, body").animate({ scrollTop: virtPosTop }, scrollSpeed);
         });
     });
 }
 
 function hrefMatchURL(element, userFunc, elseFunc) {
     $(element).each(function () {
+        virtThisElem = $(this);
         var hrefURL = window.location.href;
         if ($(this).attr("href") == hrefURL) {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Matching Href");
            }
-           else {
+           else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 userFunc();
-           }
+            }
         }
         else {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Doesn't match Href");
            }
-           else {
+           else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 elseFunc();
            }
         }
@@ -313,16 +324,16 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Scrolling");
            }
-           else {
+           else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 elseFunc();
-           }
+            }
         }
         else {
             $(element).addClass(scrollClass);
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Scrolling");
            }
-           else {
+           else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 userFunc();
            }
         }
@@ -391,7 +402,7 @@ function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("Contains");
                    }
-                   else {
+                   else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                         userFunc();
                    }
                 }
@@ -413,18 +424,18 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("Matching attribute");
                    }
-                   else {
-                        userFunc();
-                   }
+                   else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                    userFunc();
+                    }
                 }
-            }
-            else {
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                    alert("No match");
-               }
-               else {
+                else {
+                    if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+                        alert("No matching attribute");
+                   }
+                   else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                     elseFunc();
-               }
+                    }
+                }
             }
         });
     });
@@ -451,20 +462,20 @@ function isElemUpper(element, userFunc, elseFunc) {
             virtThisElem = $(this);
             virtIsUpper = $(this).text();
             if(virtIsUpper == virtIsUpper.toUpperCase()) {             
-               if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Upper");
                }
-               else {
-                    userFunc();
-               }
+               else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                userFunc();
+                }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not upper");
                }
-               else {
-                    elseFunc();
-               }
+               else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                elseFunc();
+                }
             }
         });
     });
@@ -499,18 +510,18 @@ function isElemCaps(element, userFunc, elseFunc) {
             if(firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase()) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Capitalized");
-               }
-               else {
-                    userFunc();
-               }
+                 }
+               else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                userFunc();
+                }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not capitalized");
                }
-               else {
-                    elseFunc();
-               }
+               else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                elseFunc();
+                }
             }
             
         });
@@ -523,18 +534,18 @@ function isElemLower(element, userFunc, elseFunc) {
             virtThisElem = $(this);
             virtIsLower = $(this).text();
             if(virtIsLower == virtIsLower.toLowerCase()) {             
-               if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Lower");
                }
-               else {
-                    userFunc();
-               }
+               else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                userFunc();
+                }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not lower");
                }
-               else {
+               else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                     elseFunc();
                }
             }
