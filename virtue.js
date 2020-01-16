@@ -88,20 +88,22 @@ function elementLength() {
 
 function ifElemExists(element, userFunc, elseFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
             alert("Element exists");
-        }
-        else if (typeof userFunc == 'function' && typeof elseFunc != 'function') {
+            userFunc = undefined;
+       }
+       else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
             userFunc();
         }
     }
     else {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
             alert("Element doesn't exist");
-        }
-        else if (typeof elseFunc == 'function' && typeof userFunc != 'function') {
+            elseFunc = undefined;
+       }
+       else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
             elseFunc();
-        }
+       }
     }
 }
 
@@ -299,6 +301,7 @@ function hrefMatchURL(element, userFunc, elseFunc) {
         if ($(this).attr("href") == hrefURL) {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Matching Href");
+                userFunc = undefined;
            }
            else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 userFunc();
@@ -307,6 +310,7 @@ function hrefMatchURL(element, userFunc, elseFunc) {
         else {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Doesn't match Href");
+                elseFunc = undefined;
            }
            else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 elseFunc();
@@ -321,6 +325,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
             $(element).removeClass(scrollClass);
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Scrolling");
+                userFunc = undefined;
            }
            else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 elseFunc();
@@ -330,6 +335,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
             $(element).addClass(scrollClass);
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Scrolling");
+                elseFunc = undefined;
            }
            else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 userFunc();
@@ -421,6 +427,7 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
                 if (virtMatchElemClassExact == matchingAttr) {
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("Matching attribute");
+                        userFunc = undefined;
                    }
                    else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                     userFunc();
@@ -429,9 +436,10 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
                 else {
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("No matching attribute");
+                        elseFunc = undefined;
                    }
                    else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                    elseFunc();
+                        elseFunc();
                     }
                 }
             }
@@ -462,17 +470,19 @@ function isElemUpper(element, userFunc, elseFunc) {
             if(virtIsUpper == virtIsUpper.toUpperCase()) {             
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Upper");
+                    userFunc = undefined;
                }
                else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                userFunc();
+                    userFunc();
                 }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not upper");
+                    elseFunc = undefined;
                }
                else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                elseFunc();
+                    elseFunc();
                 }
             }
         });
@@ -508,17 +518,19 @@ function isElemCaps(element, userFunc, elseFunc) {
             if(firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase()) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Capitalized");
+                    userFunc = undefined;
                  }
                else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                userFunc();
+                    userFunc();
                 }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not capitalized");
+                    elseFunc = undefined;
                }
                else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                elseFunc();
+                    elseFunc();
                 }
             }
             
@@ -534,14 +546,16 @@ function isElemLower(element, userFunc, elseFunc) {
             if(virtIsLower == virtIsLower.toLowerCase()) {             
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Lower");
+                    userFunc = undefined;
                }
                else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                userFunc();
+                    userFunc();
                 }
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Not lower");
+                    elseFunc = undefined;
                }
                else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                     elseFunc();
