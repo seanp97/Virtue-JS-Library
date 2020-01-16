@@ -63,7 +63,12 @@ function isElemHidden(element, userFunc, elseFunc) {
 
 function ifElemExists(element, userFunc) {
     if ($(element).length > 0) {
-        userFunc();
+        if (typeof userFunc != 'function') { 
+            alert("Element exists");
+        }
+        else {
+            userFunc();
+        }
     }
 }
 
