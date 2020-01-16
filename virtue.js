@@ -86,13 +86,21 @@ function elementLength() {
     return newVirtElemLen;
 }
 
-function ifElemExists(element, userFunc) {
+function ifElemExists(element, userFunc, elseFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function') { 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
             alert("Element exists");
         }
-        else if (typeof userFunc == 'function') {
+        else if (typeof userFunc == 'function' && typeof elseFunc != 'function') {
             userFunc();
+        }
+    }
+    else {
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+            alert("Element doesn't exist");
+        }
+        else if (typeof elseFunc == 'function' && typeof userFunc != 'function') {
+            elseFunc();
         }
     }
 }
@@ -227,12 +235,10 @@ function isDragging(element, userFunc) {
 /* 
     Example 
 
-    <ul class="navLink">
+    <ul>
         <li id="navOne">Nav 1</li>
         <li id="navTwo">Nav 2</li>
         <li id="navThree">Nav 3</li>
-        <li id="navFour">Nav 4</li>
-        <li id="navFive">Nav 5</li>
     </ul>
 
         <section data-href="navOne">
@@ -245,14 +251,6 @@ function isDragging(element, userFunc) {
 
         <section data-href="navThree">
             Three
-        </section>
-
-        <section data-href="navFour">
-            Four
-        </section>
-
-        <section data-href="navFive">
-            Five
         </section>
 
         Needs to be executed on scroll
