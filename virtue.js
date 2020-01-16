@@ -24,6 +24,8 @@ var virtIsLower = "";
 var virtNewElemClass = "";
 var virtThisElem = "";
 var virtIsElemCapsFullWord = "";
+var virtElemHiddenBool = false;
+var newVirtElemHiddenBool = undefined;
 
 
 // Will only work if tag/class is nested inside. Will not work if a sibling
@@ -43,20 +45,33 @@ function isElemHidden(element, userFunc, elseFunc) {
         if ($(element).is(":hidden") || $(element).css("visibility") == "hidden") {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Element is hidden");
+                virtElemHiddenBool = true;
+                return virtElemHiddenBool;
             }
             else if (typeof userFunc == 'function' && typeof elseFunc != 'function') {
                 userFunc();
+                virtElemHiddenBool = true;
+                return virtElemHiddenBool;
             }
         }
         else {
             if (typeof userFunc != 'function' && typeof elseFunc == 'function'){ 
                 elseFunc();
+                virtElemHiddenBool = false;
+                return virtElemHiddenBool;
             }
             else {
                 alert("Element is not hidden");
+                virtElemHiddenBool = false;
+                return virtElemHiddenBool;
             }
         }
     });
+}
+
+function elementIsHidden() {
+    newVirtElemHiddenBool = virtElemHiddenBool;
+    return newVirtElemHiddenBool;
 }
 
 function ifElemExists(element, userFunc) {
