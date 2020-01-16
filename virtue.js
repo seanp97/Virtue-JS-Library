@@ -1,5 +1,5 @@
 //// Variables
-var matchElemClass = "";
+var virtMatchElemClass = "";
 var virtMatchElemClassExact = "";
 var virtThisText = "";
 var virtThisColour = "";
