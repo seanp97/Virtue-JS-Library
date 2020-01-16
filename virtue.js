@@ -39,25 +39,23 @@ function sliderChild(element, findChild, slideSpeed, activeClass) {
 
 function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
-        $(this).click(function () {
-            virtThisElem = $(this);
-            if ($(element).is(":hidden")) {
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                    alert("Element is hidden");
-               }
-               else {
-                    userFunc();
-               }
+        virtThisElem = $(this);
+        if ($(element).is(":hidden") || $(element).css("visibility") == "hidden") {
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+                alert("Element is hidden");
+            }
+            else if (typeof userFunc == 'function' && typeof elseFunc != 'function') {
+                userFunc();
+            }
+        }
+        else {
+            if (typeof userFunc != 'function' && typeof elseFunc == 'function'){ 
+                elseFunc();
             }
             else {
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                    alert("Element is not hidden");
-               }
-               else {
-                    elseFunc();
-               }
+                alert("Element is not hidden");
             }
-        }); 
+        }
     });
 }
 
