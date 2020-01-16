@@ -1,38 +1,36 @@
 //// Variables
 var matchElemClass = "";
-var matchElemClassExact = "";
-var thisText = "";
-var thisColour = "";
-var thisBgColour = "";
-var Init = 0;
-var Temp = 0;
-var imgSrc = "";
-var isPressed = false;
-var thisHeight = 0;
-var thisWidth = 0;
-var lastScrollTop = 0;
-var elemClass = "";
-var newHeight = 0;
-var newWidth = 0;
-var newBgColour = "";
-var newColour = "";
-var newText = "";
-var inc = 0;
-var newInc = 0;
-var isUpper = "";
-var isLower = "";
-var newElemClass = "";
-var inpVal = "";
-var newInpVal = "";
-var thisElem = "";
-var isElemCapsFullWord = "";
+var virtMatchElemClassExact = "";
+var virtThisText = "";
+var virtThisColour = "";
+var virtThisBgColour = "";
+var virtInit = 0;
+var virtTemp = 0;
+var virtImgSrc = "";
+var virtIsPressed = false;
+var virtThisHeight = 0;
+var virtThisWidth = 0;
+var virtLastScrollTop = 0;
+var virtElemClass = "";
+var virtNewHeight = 0;
+var virtNewWidth = 0;
+var virtNewBgColour = "";
+var virtNewColour = "";
+var virtNewText = "";
+var virtInc = 0;
+var virtNewInc = 0;
+var virtIsUpper = "";
+var virtIsLower = "";
+var virtNewElemClass = "";
+var virtThisElem = "";
+var virtIsElemCapsFullWord = "";
 
 
 // Will only work if tag/class is nested inside. Will not work if a sibling
 function sliderChild(element, findChild, slideSpeed, activeClass) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
+            virtThisElem = $(this);
             $(this).find(findChild).slideToggle(slideSpeed).closest(element).addClass(activeClass);
             $(element).not(this).find(findChild).slideUp(slideSpeed).closest(element).removeClass(activeClass);
         });
@@ -42,7 +40,7 @@ function sliderChild(element, findChild, slideSpeed, activeClass) {
 function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
+            virtThisElem = $(this);
             if ($(element).is(":hidden")) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Element is hidden");
@@ -72,87 +70,87 @@ function ifElemExists(element, userFunc) {
 function getText(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            thisText = $(this).text();
-            return thisText;
+            virtThisElem = $(this);
+            virtThisText = $(this).text();
+            return virtThisText;
         });
     });
 }
 
 function elementText() {
-    newText = thisText;
-    return newText;
+    virtNewText = virtThisText;
+    return virtNewText;
 }
 
 function settingHeightToBiggest(element) {
     $(element).each(function () {
-        Temp = jQuery(this).height();
+        virtTemp = jQuery(this).height();
 
-        if (Temp > Init) {
-            Init = Temp;
+        if (virtTemp > virtInit) {
+            virtInit = virtTemp;
         }
     });
-    jQuery(element).css("height", Init);
+    jQuery(element).css("height", virtInit);
 }
 
 function getColour(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            thisColour = $(this).css("color");
-            return thisColour;
+            virtThisElem = $(this);
+            virtThisColour = $(this).css("color");
+            return virtThisColour;
         });
     });
 }
 
 function elementColour() {
-    newColour = thisColour;
-    return newColour;
+    virtNewColour = virtThisColour;
+    return virtNewColour;
 }
 
 function getBackgroundColour(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            thisBgColour = $(this).css("background-color");
-            return thisBgColour;
+            virtThisElem = $(this);
+            virtThisBgColour = $(this).css("background-color");
+            return virtThisBgColour;
         });
     });
 }
 
 function elementBackgroundColour() {
-    newBgColour = thisBgColour;
-    return newBgColour;
+    virtNewBgColour = virtThisBgColour;
+    return virtNewBgColour;
 }
 
 function getHeight(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            thisHeight = $(this).height();
-            return thisHeight;
+            virtThisElem = $(this);
+            virtThisHeight = $(this).height();
+            return virtThisHeight;
         });
     });
 }
 
 function elementHeight() {
-    newHeight = thisHeight;
-    return newHeight;
+    virtNewHeight = virtThisHeight;
+    return virtNewHeight;
 }
 
 function getWidth(element) {
     $(element).each(function () {
         $(this).click(function (){
-            thisElem = $(this);
-            thisWidth = $(this).width();
-            return thisWidth;
+            virtThisElem = $(this);
+            virtThisWidth = $(this).width();
+            return virtThisWidth;
         });
     });
 }
 
 function elementWidth() {
-    newWidth = thisWidth;
-    return newWidth;
+    virtNewWidth = virtThisWidth;
+    return virtNewWidth;
 }
 
 function backToTop(element, speed) {
@@ -164,32 +162,32 @@ function backToTop(element, speed) {
 function imageChange(element, mainElem) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            imgSrc = $(this).attr("src");
-            $(mainElem).attr("src", imgSrc);
+            virtThisElem = $(this);
+            virtImgSrc = $(this).attr("src");
+            $(mainElem).attr("src", virtImgSrc);
         });
     });
 }
 
 function isDragging(element, userFunc) {
     $(element).mousedown(function () { 
-        thisElem = $(this);
-        isPressed = true;
+        virtThisElem = $(this);
+        virtIsPressed = true;
     });
 
     $(document).mouseup(function () {
-        isPressed = false;
+        virtIsPressed = false;
     });
 
     $(document).mousemove(function () {
-        if (isPressed) {
+        if (virtIsPressed) {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                 alert("Dragging");
-                isPressed = false;
+                virtIsPressed = false;
            }
            else {
                 userFunc();
-                isPressed = false;
+                virtIsPressed = false;
            }
         }
         else {
@@ -260,7 +258,7 @@ function navHighlight(element, navLink, sectionClass, navActiveClass, scrollInPo
 function scrollToElem(element, attrType, tag, dataAttr) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
+            virtThisElem = $(this);
             var thisID = $(this).attr(attrType);          
             var x =  $(`body ${tag}[${dataAttr}="${thisID}"]`).position().top;
             $("html, body").animate({ scrollTop: x }, 1000);
@@ -351,26 +349,26 @@ function fadeInOnScroll(element, fadeInHeight, fadeInClass) {
 function getElementsClass(element, attrType) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            elemClass = $(this).attr(attrType).split(/\s+/);
-           if (elemClass != "" || elemClass != null || elemClass != undefined) {
-                return elemClass;
+            virtThisElem = $(this);
+            virtElemClass = $(this).attr(attrType).split(/\s+/);
+           if (virtElemClass != "" || virtElemClass != null || virtElemClass != undefined) {
+                return virtElemClass;
            }
         });
     });
 }
 
 function elementClasses() {
-    newElemClass = elemClass;
-    return newElemClass;
+    virtNewElemClass = virtElemClass;
+    return virtNewElemClass;
 }
 
 function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            matchElemClass = $(this).attr(attrType).split(/\s+/);
-            if (matchElemClass != "" || matchElemClass != null || matchElemClass != undefined) {
+            virtThisElem = $(this);
+            virtMatchElemClass = $(this).attr(attrType).split(/\s+/);
+            if (virtMatchElemClass != "" || virtMatchElemClass != null || virtMatchElemClass != undefined) {
                 if ($(this).hasClass(matchingAttr)) {
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("Contains");
@@ -390,10 +388,10 @@ function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
 function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            matchElemClassExact = $(this).attr(attrType).split(/\s+/);
-            if (matchElemClassExact != "" || matchElemClassExact != null || matchElemClassExact != undefined) {
-                if (matchElemClassExact == matchingAttr) {
+            virtThisElem = $(this);
+            virtMatchElemClassExact = $(this).attr(attrType).split(/\s+/);
+            if (virtMatchElemClassExact != "" || virtMatchElemClassExact != null || virtMatchElemClassExact != undefined) {
+                if (virtMatchElemClassExact == matchingAttr) {
                     if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                         alert("Matching attribute");
                    }
@@ -417,24 +415,24 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
 function incrementer(element, incValue) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            inc += incValue;
-            return inc;
+            virtThisElem = $(this);
+            virtInc += incValue;
+            return virtInc;
         });
     });
 }
 
 function elementIncrementer() {
-    newInc = inc;
-    return newInc;
+    virtNewInc = virtInc;
+    return virtNewInc;
 }
 
 function isElemUpper(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            isUpper = $(this).text();
-            if(isUpper == isUpper.toUpperCase()) {             
+            virtThisElem = $(this);
+            virtIsUpper = $(this).text();
+            if(virtIsUpper == virtIsUpper.toUpperCase()) {             
                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Upper");
                }
@@ -457,11 +455,11 @@ function isElemUpper(element, userFunc, elseFunc) {
 //Only works with one worded sentences
 /*
     $(document).click(function () { 
-        if(isElemCapsFullWord) {
-            thisElem.css("color", "blue");
+        if(virtIsElemCapsFullWord) {
+            virtThisElem.css("color", "blue");
         }
-        else if (isElemCapsFullWord == false) {
-            thisElem.css("color", "red");
+        else if (virtIsElemCapsFullWord == false) {
+            virtThisElem.css("color", "red");
         }
     }); 
 
@@ -472,11 +470,11 @@ function isElemUpper(element, userFunc, elseFunc) {
 function isElemCaps(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
+            virtThisElem = $(this);
             firstLetter = $(this).text().substring(0, 1);
             textLen = $(this).text().length;
             restOfString = $(this).text().substring(1, textLen);
-            isElemCapsFullWord = firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase();
+            virtIsElemCapsFullWord = firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase();
 
             //↑↑↑↑ Returns True if Capitalized and False if not Capitalized
 
@@ -504,9 +502,9 @@ function isElemCaps(element, userFunc, elseFunc) {
 function isElemLower(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisElem = $(this);
-            isLower = $(this).text();
-            if(isLower == isLower.toLowerCase()) {             
+            virtThisElem = $(this);
+            virtIsLower = $(this).text();
+            if(virtIsLower == virtIsLower.toLowerCase()) {             
                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Lower");
                }
