@@ -24,13 +24,15 @@ var isLower = "";
 var newElemClass = "";
 var inpVal = "";
 var newInpVal = "";
-var thisClick = "";
+var thisElem = "";
 var isElemCapsFullWord = "";
 
+
+// Will only work if tag/class is nested inside. Will not work if a sibling
 function sliderChild(element, findChild, slideSpeed, activeClass) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             $(this).find(findChild).slideToggle(slideSpeed).closest(element).addClass(activeClass);
             $(element).not(this).find(findChild).slideUp(slideSpeed).closest(element).removeClass(activeClass);
         });
@@ -40,10 +42,10 @@ function sliderChild(element, findChild, slideSpeed, activeClass) {
 function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             if ($(element).is(":hidden")) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                    alert("No function found");
+                    alert("Element is hidden");
                }
                else {
                     userFunc();
@@ -51,7 +53,7 @@ function isElemHidden(element, userFunc, elseFunc) {
             }
             else {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                    alert("No function found");
+                    alert("Element is not hidden");
                }
                else {
                     elseFunc();
@@ -63,19 +65,14 @@ function isElemHidden(element, userFunc, elseFunc) {
 
 function ifElemExists(element, userFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-            alert("No function found");
-       }
-       else {
-            userFunc();
-       }
+        userFunc();
     }
 }
 
 function getText(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             thisText = $(this).text();
             return thisText;
         });
@@ -101,7 +98,7 @@ function settingHeightToBiggest(element) {
 function getColour(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             thisColour = $(this).css("color");
             return thisColour;
         });
@@ -116,7 +113,7 @@ function elementColour() {
 function getBackgroundColour(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             thisBgColour = $(this).css("background-color");
             return thisBgColour;
         });
@@ -131,7 +128,7 @@ function elementBackgroundColour() {
 function getHeight(element) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             thisHeight = $(this).height();
             return thisHeight;
         });
@@ -146,7 +143,7 @@ function elementHeight() {
 function getWidth(element) {
     $(element).each(function () {
         $(this).click(function (){
-            thisClick = $(this);
+            thisElem = $(this);
             thisWidth = $(this).width();
             return thisWidth;
         });
@@ -167,7 +164,7 @@ function backToTop(element, speed) {
 function imageChange(element, mainElem) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             imgSrc = $(this).attr("src");
             $(mainElem).attr("src", imgSrc);
         });
@@ -176,6 +173,7 @@ function imageChange(element, mainElem) {
 
 function isDragging(element, userFunc) {
     $(element).mousedown(function () { 
+        thisElem = $(this);
         isPressed = true;
     });
 
@@ -186,7 +184,8 @@ function isDragging(element, userFunc) {
     $(document).mousemove(function () {
         if (isPressed) {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                alert("No function found");
+                alert("Dragging");
+                isPressed = false;
            }
            else {
                 userFunc();
@@ -258,12 +257,12 @@ function navHighlight(element, navLink, sectionClass, navActiveClass, scrollInPo
     });
 }
 
-function scrollToElem(element, attrType, dataAttr) {
+function scrollToElem(element, attrType, tag, dataAttr) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             var thisID = $(this).attr(attrType);          
-            var x =  $(`body section[${dataAttr}="${thisID}"]`).position().top;
+            var x =  $(`body ${tag}[${dataAttr}="${thisID}"]`).position().top;
             $("html, body").animate({ scrollTop: x }, 1000);
         });
     });
@@ -296,7 +295,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
         if (event.originalEvent.wheelDelta >= 0) {
             $(element).removeClass(scrollClass);
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                alert("No function found");
+                alert("Scrolling");
            }
            else {
                 elseFunc();
@@ -305,7 +304,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
         else {
             $(element).addClass(scrollClass);
             if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
-                alert("No function found");
+                alert("Scrolling");
            }
            else {
                 userFunc();
@@ -352,7 +351,7 @@ function fadeInOnScroll(element, fadeInHeight, fadeInClass) {
 function getElementsClass(element, attrType) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             elemClass = $(this).attr(attrType).split(/\s+/);
            if (elemClass != "" || elemClass != null || elemClass != undefined) {
                 return elemClass;
@@ -369,7 +368,7 @@ function elementClasses() {
 function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             matchElemClass = $(this).attr(attrType).split(/\s+/);
             if (matchElemClass != "" || matchElemClass != null || matchElemClass != undefined) {
                 if ($(this).hasClass(matchingAttr)) {
@@ -391,7 +390,7 @@ function matchingElementsClass(element, attrType, matchingAttr, userFunc) {
 function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             matchElemClassExact = $(this).attr(attrType).split(/\s+/);
             if (matchElemClassExact != "" || matchElemClassExact != null || matchElemClassExact != undefined) {
                 if (matchElemClassExact == matchingAttr) {
@@ -418,7 +417,7 @@ function matchingElementsClassExactly(element, attrType, matchingAttr, userFunc,
 function incrementer(element, incValue) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             inc += incValue;
             return inc;
         });
@@ -433,7 +432,7 @@ function elementIncrementer() {
 function isElemUpper(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             isUpper = $(this).text();
             if(isUpper == isUpper.toUpperCase()) {             
                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
@@ -459,23 +458,26 @@ function isElemUpper(element, userFunc, elseFunc) {
 /*
     $(document).click(function () { 
         if(isElemCapsFullWord) {
-            thisClick.css("color", "blue");
+            thisElem.css("color", "blue");
         }
         else if (isElemCapsFullWord == false) {
-            thisClick.css("color", "red");
+            thisElem.css("color", "red");
         }
     }); 
 
+    ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
 */
 function isElemCaps(element, userFunc, elseFunc) {
-    $(element).each(function (){
+    $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             firstLetter = $(this).text().substring(0, 1);
             textLen = $(this).text().length;
             restOfString = $(this).text().substring(1, textLen);
             isElemCapsFullWord = firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase();
-            
+
             //↑↑↑↑ Returns True if Capitalized and False if not Capitalized
 
             if(firstLetter == firstLetter.toUpperCase() && restOfString == restOfString.toLowerCase()) {
@@ -502,7 +504,7 @@ function isElemCaps(element, userFunc, elseFunc) {
 function isElemLower(element, userFunc, elseFunc) {
     $(element).each(function () {
         $(this).click(function () {
-            thisClick = $(this);
+            thisElem = $(this);
             isLower = $(this).text();
             if(isLower == isLower.toLowerCase()) {             
                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
