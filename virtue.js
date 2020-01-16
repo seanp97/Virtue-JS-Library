@@ -28,6 +28,8 @@ var virtElemHiddenBool = false;
 var newVirtElemHiddenBool = undefined;
 var virtElemLen = 0;
 var newVirtElemLen = 0;
+var virtCSSstyle = "";
+var newVirtCSSstyle = "";
 
 
 // Will only work if tag/class is nested inside. Will not work if a sibling
@@ -133,35 +135,40 @@ function settingHeightToBiggest(element) {
     jQuery(element).css("height", virtInit);
 }
 
-function getColour(element) {
-    $(element).each(function () {
-        $(this).click(function () {
-            virtThisElem = $(this);
-            virtThisColour = $(this).css("color");
-            return virtThisColour;
-        });
-    });
-}
 
-function elementColour() {
-    virtNewColour = virtThisColour;
-    return virtNewColour;
-}
+//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 
+//Commented out due to function downwards getting all CSS styles
+// getCSSstyle();
 
-function getBackgroundColour(element) {
-    $(element).each(function () {
-        $(this).click(function () {
-            virtThisElem = $(this);
-            virtThisBgColour = $(this).css("background-color");
-            return virtThisBgColour;
-        });
-    });
-}
+// function getColour(element) {
+//     $(element).each(function () {
+//         $(this).click(function () {
+//             virtThisElem = $(this);
+//             virtThisColour = $(this).css("color");
+//             return virtThisColour;
+//         });
+//     });
+// }
 
-function elementBackgroundColour() {
-    virtNewBgColour = virtThisBgColour;
-    return virtNewBgColour;
-}
+// function elementColour() {
+//     virtNewColour = virtThisColour;
+//     return virtNewColour;
+// }
+
+// function getBackgroundColour(element) {
+//     $(element).each(function () {
+//         $(this).click(function () {
+//             virtThisElem = $(this);
+//             virtThisBgColour = $(this).css("background-color");
+//             return virtThisBgColour;
+//         });
+//     });
+// }
+
+// function elementBackgroundColour() {
+//     virtNewBgColour = virtThisBgColour;
+//     return virtNewBgColour;
+// }
 
 function getHeight(element) {
     $(element).each(function () {
@@ -563,4 +570,18 @@ function isElemLower(element, userFunc, elseFunc) {
             }
         });
     });
+}
+
+function getCSSstyle(element, CSSstyle) {
+    $(element).each(function () {
+        $(this).click(function () {
+            virtCSSstyle = $(this).css(CSSstyle);
+            return virtCSSstyle;     
+        });
+    });
+}
+
+function elementCSSstyle() {
+    newVirtCSSstyle = virtCSSstyle;
+    return newVirtCSSstyle;
 }
