@@ -1,35 +1,15 @@
 //// Variables
-var virtMatchElemClass = "";
-var virtMatchElemClassExact = "";
-var virtThisText = "";
-var virtThisColour = "";
-var virtThisBgColour = "";
-var virtInit = 0;
-var virtTemp = 0;
-var virtImgSrc = "";
-var virtIsPressed = false;
-var virtThisHeight = 0;
-var virtThisWidth = 0;
-var virtLastScrollTop = 0;
-var virtElemClass = "";
-var virtNewHeight = 0;
-var virtNewWidth = 0;
-var virtNewBgColour = "";
-var virtNewColour = "";
-var virtNewText = "";
-var virtInc = 0;
-var virtNewInc = 0;
-var virtIsUpper = "";
-var virtIsLower = "";
-var virtNewElemClass = "";
-var virtThisElem = "";
-var virtIsElemCapsFullWord = "";
-var virtElemHiddenBool = false;
+var virtMatchElemClass, virtMatchElemClassExact, virtThisText, virtThisColour, virtThisBgColour, virtImgSrc, virtElemClass,
+virtNewBgColour, virtNewColour, virtNewText, virtIsUpper, virtIsLower, virtNewElemClass, virtThisElem, virtIsElemCapsFullWord,
+virtCSSstyle, newVirtCSSstyle = "";
+
+var virtInit, virtTemp, virtThisHeight, virtThisWidth, virtLastScrollTop, virtNewHeight, virtNewWidth, virtInc, virtNewInc,
+virtElemLen, newVirtElemLen = 0;
+
+
 var newVirtElemHiddenBool = undefined;
-var virtElemLen = 0;
-var newVirtElemLen = 0;
-var virtCSSstyle = "";
-var newVirtCSSstyle = "";
+var virtElemHiddenBool = false;
+var virtIsPressed = false;
 
 
 // Will only work if tag/class is nested inside. Will not work if a sibling
