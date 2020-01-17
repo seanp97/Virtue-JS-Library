@@ -6,7 +6,6 @@ virtCSSstyle, newVirtCSSstyle = "";
 var virtInit, virtTemp, virtThisHeight, virtThisWidth, virtLastScrollTop, virtNewHeight, virtNewWidth, virtInc, virtNewInc,
 virtElemLen, newVirtElemLen = 0;
 
-
 var newVirtElemHiddenBool = undefined;
 var virtElemHiddenBool = false;
 var virtIsPressed = false;
