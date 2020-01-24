@@ -1,0 +1,90 @@
+Virtue JS
+
+How to use this simple JS library
+
+
+-- function sliderChild(element, findChild, slideSpeed, activeClass)
+
+
+     sectionTest
+        h1Hiddenh1
+     section
+     sectionTest
+       h1Hiddenh1
+    section
+    sectionTest
+       h1Hiddenh1
+   section
+
+
+$(document).ready(function () {
+    sliderChild(section, h1, 200, active);
+});
+
+
+1st parameter we find the parent element. 2nd parameter we find the child we want to slide.
+3rd param we set how fast we want to slide. 4th param is adding a class to closest of said element.
+
+----------------------------------------------------------------------
+
+
+
+function isElemHidden(element, userFunc, elseFunc) 
+
+We have 3 params.
+
+1st param will find the elements state. Will check if hidden or display - none.
+
+If only 1st param is entered, it will alert the visibilty state. 
+
+if you add a 2nd param it will execute either one or the other dependent on truefalse
+
+
+function hidden() {
+    $(section).addClass(Hidden);
+}
+
+function notHidden() {
+    $(section).addClass(notHidden);
+}
+
+$(document).ready(function () {
+    isElemHidden(h1, hidden, notHidden);
+    //Or we can have one param which will alert the state instead
+    isElemHidden(h1);
+});
+
+----------------------------------------------
+
+function ifElemExists(element, userFunc, elseFunc)
+
+1st param is element/selector. 2 and 3 are option functions to execute
+
+function exists() {
+    $("section").addClass("Hidden");
+}
+
+function notExists() {
+    $("section").addClass("notHidden");
+}
+
+$(document).ready(function () {
+    ifElemExists("h1", exists, notExists);
+    //Or
+    ifElemExists("h1");
+});
+
+
+---------------------------------------------------------------------
+
+
+function getText(element)
+
+Get text of said element. Now that I have the text, it has been alerted in this example. 
+
+
+$(document).click(function () { 
+    getText("h1");
+    alert(elementText());
+});
+
