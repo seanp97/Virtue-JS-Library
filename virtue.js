@@ -26,7 +26,7 @@ function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
         virtThisElem = $(this);
         if ($(element).is(":hidden") || $(element).css("visibility") == "hidden") {
-            if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
                 alert("Element is hidden");
                 virtElemHiddenBool = true;
                 return virtElemHiddenBool;
@@ -38,7 +38,7 @@ function isElemHidden(element, userFunc, elseFunc) {
             }
         }
         else {
-            if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
                 elseFunc();
                 virtElemHiddenBool = false;
                 return virtElemHiddenBool;
@@ -69,7 +69,7 @@ function elementLength() {
 
 function ifElemExists(element, userFunc, elseFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
             alert("Element exists");
             userFunc = undefined;
        }
@@ -78,7 +78,7 @@ function ifElemExists(element, userFunc, elseFunc) {
         }
     }
     else {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
             alert("Element doesn't exist");
             elseFunc = undefined;
        }
@@ -111,44 +111,9 @@ function settingHeightToBiggest(element) {
             virtInit = virtTemp;
         }
     });
-    
+
     jQuery(element).css("height", virtInit);
 }
-
-
-//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 
-//Commented out due to function downwards getting all CSS styles
-// getCSSstyle();
-
-// function getColour(element) {
-//     $(element).each(function () {
-//         $(this).click(function () {
-//             virtThisElem = $(this);
-//             virtThisColour = $(this).css("color");
-//             return virtThisColour;
-//         });
-//     });
-// }
-
-// function elementColour() {
-//     virtNewColour = virtThisColour;
-//     return virtNewColour;
-// }
-
-// function getBackgroundColour(element) {
-//     $(element).each(function () {
-//         $(this).click(function () {
-//             virtThisElem = $(this);
-//             virtThisBgColour = $(this).css("background-color");
-//             return virtThisBgColour;
-//         });
-//     });
-// }
-
-// function elementBackgroundColour() {
-//     virtNewBgColour = virtThisBgColour;
-//     return virtNewBgColour;
-// }
 
 function getHeight(element) {
     $(element).each(function () {
@@ -197,7 +162,7 @@ function imageChange(element, mainElem) {
 }
 
 function isDragging(element, userFunc) {
-    $(element).mousedown(function () { 
+    $(element).mousedown(function () {
         virtThisElem = $(this);
         virtIsPressed = true;
     });
@@ -208,7 +173,7 @@ function isDragging(element, userFunc) {
 
     $(document).mousemove(function () {
         if (virtIsPressed) {
-            if (typeof userFunc != 'function') { 
+            if (typeof userFunc != 'function') {
                 alert("Dragging");
                 virtIsPressed = false;
            }
@@ -274,7 +239,7 @@ function scrollToElem(element, attrType, tag, dataAttr, scrollSpeed) {
     $(element).each(function () {
         $(this).click(function () {
             virtThisElem = $(this);
-            var virtThisID = $(this).attr(attrType);          
+            var virtThisID = $(this).attr(attrType);
             var virtPosTop =  $(`body ${tag}[${dataAttr}="${virtThisID}"]`).position().top;
             $("html, body").animate({ scrollTop: virtPosTop }, scrollSpeed);
         });
@@ -320,7 +285,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
         }
         else {
             $(element).addClass(scrollClass);
-            if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function'){
                 alert("Scrolling");
                 elseFunc = undefined;
            }
@@ -454,7 +419,7 @@ function isElemUpper(element, userFunc, elseFunc) {
         $(this).click(function () {
             virtThisElem = $(this);
             virtIsUpper = $(this).text();
-            if(virtIsUpper == virtIsUpper.toUpperCase()) {             
+            if(virtIsUpper == virtIsUpper.toUpperCase()) {
                 if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
                     alert("Upper");
                     userFunc = undefined;
@@ -478,14 +443,14 @@ function isElemUpper(element, userFunc, elseFunc) {
 
 //Only works with one worded sentences
 /*
-    $(document).click(function () { 
+    $(document).click(function () {
         if(virtIsElemCapsFullWord) {
             virtThisElem.css("color", "blue");
         }
         else if (virtIsElemCapsFullWord == false) {
             virtThisElem.css("color", "red");
         }
-    }); 
+    });
 
     ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -520,7 +485,6 @@ function isElemCaps(element, userFunc, elseFunc) {
                     elseFunc();
                 }
             }
-            
         });
     });
 }
@@ -574,7 +538,7 @@ function searchHighlight(element, searchSelector, userFunc, elseFunc) {
             var searchText = $(this).text().toLowerCase();
             //alert(searchText);
             if (searchText == virtInputText) {
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function') {  
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
                     alert("Matching");
                 }
                 else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
@@ -582,9 +546,9 @@ function searchHighlight(element, searchSelector, userFunc, elseFunc) {
                 }
             }
             else {
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
                     alert("Not matching");
-                } 
+                }
                 else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') { 
                     elseFunc();
                 }
