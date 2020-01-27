@@ -556,3 +556,12 @@ function searchHighlight(element, searchSelector, userFunc, elseFunc) {
         });
     }, 100);
 }
+
+function paginationActive(element, pagClass) {
+    $(element).each(function () {
+        $(this).click(function () {
+            $(this).addClass(pagClass);
+            $(element).not(this).removeClass(pagClass);
+        });
+    });
+}
