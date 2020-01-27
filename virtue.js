@@ -1,7 +1,7 @@
 //// Variables
 var virtMatchElemClass, virtMatchElemClassExact, virtThisText, virtThisColour, virtThisBgColour, virtImgSrc, virtElemClass,
 virtNewBgColour, virtNewColour, virtNewText, virtIsUpper, virtIsLower, virtNewElemClass, virtThisElem, virtIsElemCapsFullWord,
-virtCSSstyle, newVirtCSSstyle = "";
+virtCSSstyle, newVirtCSSstyle, virtInputText = "";
 
 var virtInit, virtTemp, virtThisHeight, virtThisWidth, virtLastScrollTop, virtNewHeight, virtNewWidth, virtInc, virtNewInc,
 virtElemLen, newVirtElemLen = 0;
@@ -26,24 +26,24 @@ function isElemHidden(element, userFunc, elseFunc) {
     $(element).each(function () {
         virtThisElem = $(this);
         if ($(element).is(":hidden") || $(element).css("visibility") == "hidden") {
-            if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
                 alert("Element is hidden");
                 virtElemHiddenBool = true;
                 return virtElemHiddenBool;
             }
-            else if (typeof userFunc == 'function' && typeof elseFunc != 'function') {
+            else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 userFunc();
                 virtElemHiddenBool = true;
                 return virtElemHiddenBool;
             }
         }
         else {
-            if (typeof userFunc != 'function' && typeof elseFunc == 'function'){ 
+            if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
                 elseFunc();
                 virtElemHiddenBool = false;
                 return virtElemHiddenBool;
             }
-            else {
+            else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
                 alert("Element is not hidden");
                 virtElemHiddenBool = false;
                 return virtElemHiddenBool;
@@ -69,7 +69,7 @@ function elementLength() {
 
 function ifElemExists(element, userFunc, elseFunc) {
     if ($(element).length > 0) {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
             alert("Element exists");
             userFunc = undefined;
        }
@@ -78,7 +78,7 @@ function ifElemExists(element, userFunc, elseFunc) {
         }
     }
     else {
-        if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+        if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
             alert("Element doesn't exist");
             elseFunc = undefined;
        }
@@ -111,6 +111,7 @@ function settingHeightToBiggest(element) {
             virtInit = virtTemp;
         }
     });
+    
     jQuery(element).css("height", virtInit);
 }
 
@@ -341,7 +342,7 @@ function detectScroll(element, scrollClass, userFunc, elseFunc) {
     0% {
       opacity: 0;
       transform: translateY(70%);
-    } 
+    }
     100% {
       opacity: 1;
       transform: translateY(0%);
@@ -530,7 +531,7 @@ function isElemLower(element, userFunc, elseFunc) {
             virtThisElem = $(this);
             virtIsLower = $(this).text();
             if(virtIsLower == virtIsLower.toLowerCase()) {             
-                if (typeof userFunc != 'function' && typeof elseFunc != 'function'){ 
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
                     alert("Lower");
                     userFunc = undefined;
                }
@@ -563,4 +564,31 @@ function getCSSstyle(element, CSSstyle) {
 function elementCSSstyle() {
     newVirtCSSstyle = virtCSSstyle;
     return newVirtCSSstyle;
+}
+
+function searchHighlight(element, searchSelector, userFunc, elseFunc) {
+    setInterval(function () {
+        virtInputText = $(element).val().toLowerCase();
+        $(searchSelector).each(function () {
+            virtThisElem = $(this);
+            var searchText = $(this).text().toLowerCase();
+            //alert(searchText);
+            if (searchText == virtInputText) {
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function') {  
+                    alert("Matching");
+                }
+                else if (typeof userFunc == 'function' && typeof elseFunc != 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
+                    userFunc();
+                }
+            }
+            else {
+                if (typeof userFunc != 'function' && typeof elseFunc != 'function') { 
+                    alert("Not matching");
+                } 
+                else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') { 
+                    elseFunc();
+                }
+            }
+        });
+    }, 100);
 }
