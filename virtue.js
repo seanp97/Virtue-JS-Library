@@ -39,12 +39,12 @@ function isElemHidden(element, userFunc, elseFunc) {
         }
         else {
             if (typeof userFunc != 'function' && typeof elseFunc != 'function') {
-                elseFunc();
+                alert("Element is not hidden");
                 virtElemHiddenBool = false;
                 return virtElemHiddenBool;
             }
             else if (typeof userFunc != 'function' && typeof elseFunc == 'function' || typeof userFunc == 'function' && typeof elseFunc == 'function') {
-                alert("Element is not hidden");
+                elseFunc();
                 virtElemHiddenBool = false;
                 return virtElemHiddenBool;
             }
