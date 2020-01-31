@@ -1,3 +1,5 @@
+//Virtue JS Library made by Sean Pelser
+
 //// Variables
 var virtMatchElemClass, virtMatchElemClassExact, virtThisText, virtThisColour, virtThisBgColour, virtImgSrc, virtElemClass,
 virtNewBgColour, virtNewColour, virtNewText, virtIsUpper, virtIsLower, virtNewElemClass, virtThisElem, virtIsElemCapsFullWord,
